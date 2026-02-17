@@ -1,5 +1,6 @@
 package com.elkanplace.ms_produtos.domain.model;
 
+import com.elkanplace.ms_produtos.infrastructure.adapter.input.dto.CreateProductRequest;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,13 +17,13 @@ public class Product {
     private final BigDecimal price;
     private final Integer stock;
 
-    public static Product create(String name, String description, BigDecimal price, Integer stock) {
+    public static Product create(CreateProductRequest request) {
         return Product.builder()
                 .id(UUID.randomUUID().toString())
-                .name(name)
-                .description(description)
-                .price(price)
-                .stock(stock)
+                .name(request.name())
+                .description(request.description())
+                .price(request.price())
+                .stock(request.stock())
                 .build();
     }
 
