@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.elkanplace</groupId>
 	<artifactId>elkan-api-produtos</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>ms-produtos</name>
 	<description>Gerencia o catálogo completo de produtos.</description>
 	<url/>
