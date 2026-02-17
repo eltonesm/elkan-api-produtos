@@ -5,6 +5,10 @@ Microservice responsible for product management in Elkan platform.
 ## 🚀 Tech Stack
 - Java 17
 - Spring Boot
+- Spring Web
+- Spring Data MongoDB
+- Spring Boot Actuator
+- Lombok
 - MongoDB
 - Docker
 
