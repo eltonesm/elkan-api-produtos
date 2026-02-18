@@ -23,9 +23,9 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ProductResponse create(@RequestBody @Valid CreateProductRequest request) {
-        log.info("HTTP POST /api/products - payload name={}", request.name());
-        Product product = createProductUseCasePort.execute(request);
-        log.info("HTTP POST completed - id={}", product.getId());
+        log.info("Creating product - name={}, price={}", request.name(), request.price());
+        var command = mapper.toCommand(request);
+        Product product = createProductUseCasePort.execute(command);
         return mapper.toResponse(product);
     }
 }

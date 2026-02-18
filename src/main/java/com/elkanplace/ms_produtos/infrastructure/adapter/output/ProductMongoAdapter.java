@@ -14,14 +14,24 @@ import org.springframework.stereotype.Component;
 public class ProductMongoAdapter implements ProductRepositoryPort {
 
     private final ProductDocumentMapper mapper;
-    private final ProductMongoRepository repositoty;
+    private final ProductMongoRepository repository;
+
 
     @Override
     public Product save(Product product) {
-        log.debug("Saving product to MongoDB with id={}", product.getId());
-        var document = mapper.toDocument(product);
-        var saved = repositoty.save(document);
-        log.debug("Product persisted successfully id={}", saved.getId());
-        return mapper.toDomain(saved);
+
+        try {
+
+            log.debug("Saving product to MongoDB with id={}", product.getId());
+            var document = mapper.toDocument(product);
+            var saved = repository.save(document);
+            log.debug("Product persisted successfully id={}", saved.getId());
+            return mapper.toDomain(saved);
+
+        } catch (Exception ex) {
+            log.error("event=product_persist status=error id={} message={}",
+                    product.getId(), ex.getMessage(), ex);
+            throw new RuntimeException("Error persisting product", ex);
+        }
     }
 }
