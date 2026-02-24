@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 @Log4j2
@@ -33,5 +35,12 @@ public class ProductMongoAdapter implements ProductRepositoryPort {
                     product.getId(), ex.getMessage(), ex);
             throw new RuntimeException("Error persisting product", ex);
         }
+    }
+
+    @Override
+    public Optional<Product> findById(String id) {
+        log.debug("Finding product in MongoDB id={}", id);
+        return repository.findById(id)
+                .map(mapper::toDomain);
     }
 }
